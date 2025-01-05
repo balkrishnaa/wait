@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <title>BkY</title>
+    <link rel="icon" type="image/png" href="ballu.png">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #ff7eb3, #ff758c);
+            color: #fff;
+            text-align: center;
+        }
+
+        h2 {
+            font-family: 'Pacifico', cursive;
+            /* Apply handwritten font */
+            font-size: 2em;
+            color: #fff;
+            margin: 20px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            /* Add a soft shadow for depth */
+        }
+
+
+        video {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            display: none;
+        }
+
+        .login-form {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+            width: 90%;
+            max-width: 500px;
+        }
+
+        .login-form h2 {
+            text-align: center;
+            font-size: 2em;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            font-size: 1em;
+            border: none;
+            border-radius: 8px;
+            box-sizing: border-box;
+            outline: none;
+            background: rgba(255, 255, 255, 0.8);
+            color: #333;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+
+        .form-group input {
+            font-family: 'Pacifico', cursive;
+            /* Match handwritten font */
+        }
+
+        .form-group input:focus {
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 0 5px #fc5a8d;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #fc5a8d, #e52b50);
+            color: #fff;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .login-text {
+            font-family: 'Pacifico', cursive;
+            /* Apply handwritten font only to the text */
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(135deg, #e52b50, #fc5a8d);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .success-message {
+            font-size: 1.8em;
+            color: #fff;
+            margin-top: 20px;
+            font-weight: bold;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 480px) {
+            .login-form {
+                padding: 20px;
+            }
+
+            .submit-btn {
+                font-size: 1em;
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Enter random username and password to see the magic ✨</h2>
+
+    <!-- Video Elements -->
+    <video id="videoA" src="video/wait ,they don't love you...mp4" autoplay muted playsinline loop></video>
+    <video id="videoC" src="video/video a.mp4" autoplay muted playsinline loop></video>
+    <video id="videoB" src="video/video b.mp4" autoplay muted playsinline loop></video>
+
+    <!-- Login Form -->
+    <form class="login-form" id="loginForm">
+        <div class="form-group">
+            <input type="text" id="username" name="username" placeholder="Username" autocomplete="off">
+        </div>
+        <div class="form-group">
+            <input type="password" id="password" name="password" placeholder="Password">
+        </div>
+        <button type="submit" class="submit-btn" id="loginButton">
+            <span class="login-text">Login</span>
+        </button>
+    </form>
+
+    <p class="success-message" id="successMessage" style="display: none;">kasto xa😂</p>
+    <style>
+        .success-message {
+            font-size: 1.8em;
+            font-family: 'Pacifico', cursive;
+            /* Match handwritten font */
+            color: #fff;
+            margin-top: 20px;
+            font-weight: bold;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+
+<script>
+    const videoA = document.getElementById('videoA'); // Video for username field
+    const videoC = document.getElementById('videoC'); // Video for password field
+    const videoB = document.getElementById('videoB'); // Video for form submission
+    const usernameInput = document.getElementById('username');
+    const passwordInput = document.getElementById('password');
+    const loginForm = document.getElementById('loginForm');
+    const successMessage = document.getElementById('successMessage');
+
+    let currentStep = 'username'; // Start with username input
+
+    // Helper to play a specific video
+    function playVideo(video) {
+        hideAllVideos(); // Ensure no other video is playing
+        video.style.display = 'block'; // Show the selected video
+        video.muted = false; // Unmute the video
+        video.play(); // Start playback
+    }
+
+    // Helper to hide all videos
+    function hideAllVideos() {
+        [videoA, videoC, videoB].forEach(video => {
+            video.style.display = 'none'; // Hide the video
+            video.pause(); // Pause playback
+            video.currentTime = 0; // Reset to the beginning
+        });
+    }
+
+    // Event listener for typing in the username field
+    usernameInput.addEventListener('input', () => {
+        if (currentStep === 'username' && usernameInput.value.trim() !== '') {
+            playVideo(videoA); // Play the username video
+            currentStep = 'password'; // Move to the next step
+        }
+    });
+
+    // Event listener for typing in the password field
+    passwordInput.addEventListener('input', () => {
+        if (currentStep === 'password' && passwordInput.value.trim() !== '') {
+            playVideo(videoC); // Play the password video
+            currentStep = 'login'; // Move to the next step
+        }
+    });
+
+    // Event listener for form submission
+    loginForm.addEventListener('submit', (event) => {
+        event.preventDefault(); // Prevent page refresh
+        if (currentStep === 'login') {
+            playVideo(videoB); // Play the login video
+            loginForm.style.display = 'none'; // Hide the login form
+            successMessage.style.display = 'block'; // Show success message
+            currentStep = 'done'; // Mark as completed
+        }
+    });
+
+    // Enable sound after user interaction
+    document.body.addEventListener('click', () => {
+        [videoA, videoC, videoB].forEach(video => (video.muted = false)); // Unmute all videos
+    });
+</script>
+
+
+</body>
+
+</html>
